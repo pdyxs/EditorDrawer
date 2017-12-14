@@ -8,7 +8,7 @@ public class EditorDrawer {
     public delegate void ButtonPushedDelegate();
     public delegate void TogglePushedDelegate(bool val);
 
-    public const float DEFAULT_HEIGHT = 20;
+    public static float DEFAULT_HEIGHT = EditorGUIUtility.singleLineHeight;
     public const float BOX_PADDING = 5;
 
     private static GUIStyle ToggleButtonStyleNormal = null;
