@@ -23,6 +23,14 @@ public class EditorDrawer {
         return new Rect(pos.x, pos.y + height, pos.width, pos.height - height);
     }
 
+    public static Rect WithWidth(Rect pos, float width) {
+        return new Rect(pos.x, pos.y, width, pos.height);
+    }
+
+    public static Rect FromWidth(Rect pos, float width) {
+        return new Rect(pos.x + width, pos.y, pos.width - width, pos.height);
+    }
+
     public static Rect PropertyField(Rect pos, SerializedProperty property, string child)
     {
         return PropertyField(pos, property.FindPropertyRelative(child));
@@ -34,6 +42,17 @@ public class EditorDrawer {
         EditorGUI.PropertyField(
             WithHeight(pos, height),
             property
+        );
+        return FromHeight(pos, height);
+    }
+
+    public static Rect PropertyField(Rect pos, SerializedProperty property, GUIContent label)
+    {
+        var height = EditorGUI.GetPropertyHeight(property);
+        EditorGUI.PropertyField(
+            WithHeight(pos, height),
+            property,
+            label
         );
         return FromHeight(pos, height);
     }
@@ -95,8 +114,8 @@ public class EditorDrawer {
         return height;
     }
 
-    public static Rect Box(Rect pos) {
-        GUI.Box(pos, "");
+    public static Rect Box(Rect pos, string text = "") {
+        GUI.Box(pos, text);
         return new Rect(pos.x + BOX_PADDING, pos.y + BOX_PADDING,
                         pos.width - BOX_PADDING * 2,
                         pos.height - BOX_PADDING * 2);
